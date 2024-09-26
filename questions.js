@@ -1,5 +1,4 @@
 // callback function example
-
 function multiply(x) {
     return x*x
 }
@@ -21,4 +20,27 @@ if (true) {
     }
 }
 
-// closures 
+// Closures 
+// function outer() {
+//     var x = 10;
+//     function inner() {
+//         console.log(x);
+//     }
+//     x = 20;
+//     return inner;
+// }
+// var innerFunc = outer();
+// innerFunc();
+
+function outer() {
+    var x = 10;
+    function inner() {
+        var y = 5;
+        console.log(x + y);
+        x = 20;
+    }
+    return inner;
+}
+var innerFunc = outer();
+innerFunc();
+innerFunc();
