@@ -112,3 +112,5 @@ console.log("the reduced value is: ", resultReduce);
 // reduce method use case
 let resultreduce = a.reduce((acc,sub) => sub-acc, 0)
 console.log(resultreduce)
+
+
