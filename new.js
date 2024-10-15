@@ -91,53 +91,44 @@ var close = outer();
 close();
 
 function outest() {
-    var c = 12;
     function outer(b) {
         function inner() {
             console.log(a, b, c);
         }
-        //   let a =10; 
+        let a = 10;
         return inner;
     }
+    let c = 12;
     return outer;
 }
-
 let a = 100;
 var close = outest()("Hi Closures");
 close();
+
 
 function outer() {
     let a = 10
     function inner() {
         console.log(this.a);
-
     }
     return inner
 }
 outer()()
+
 
 //   pre and post increments 
 let aincri = 1056
 function incriadder() {
     for (let i = 0; i < 10; i++) {
         // block scoped 
-        let abcd=234
+        let abcd = 234
         // function scoped
-        var bcde=234
+        var bcde = 234
         console.log(++aincri);
     }
     // let variable is not defined because it is block scoped so it is not accessible outside the for loop block but var variable is because it is not block scoped, but instead it is function scoped so it is available ouside the loop block
     // console.log(abcd, bcde);
-    
+
     return aincri
 }
 incriadder()
-
-
-
-// scope variety
-{
-    let defg=100
-    var abcdert=10
-}
-console.log(abcdert, defg);
