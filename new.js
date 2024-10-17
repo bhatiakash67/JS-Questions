@@ -128,7 +128,52 @@ function incriadder() {
     }
     // let variable is not defined because it is block scoped so it is not accessible outside the for loop block but var variable is because it is not block scoped, but instead it is function scoped so it is available ouside the loop block
     // console.log(abcd, bcde);
-
     return aincri
 }
 incriadder()
+
+// this keyword
+console.log(this);
+function thistest() {
+    // console.log("normal function", this);
+}
+thistest()
+const aaa = () => {
+    console.log("arrow function", this)
+}
+aaa()
+
+let aOb = {
+    name: "ronaldo",
+    age: 36,
+    func: function () {
+        console.log(this.name);
+    }
+}
+aOb.func()
+
+
+// promise 
+function getUserData(isSuccess) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (isSuccess) {
+                const user = {
+                    name: 'john', age: 25
+                }
+                resolve(user)
+            }
+            else {
+                reject("Failed to fetch user data")
+            }
+        }, 5000)
+    })
+}
+
+getUserData(false)
+    .then((userData) => {
+        console.log("Data received: ", userData);
+    })
+    .catch((error)=> {
+    console.log("Error:", error);
+})
