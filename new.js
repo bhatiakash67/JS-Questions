@@ -174,6 +174,41 @@ getUserData(false)
     .then((userData) => {
         console.log("Data received: ", userData);
     })
-    .catch((error)=> {
-    console.log("Error:", error);
-})
+    .catch((error) => {
+        console.log("Error:", error);
+    })
+
+// leetcode question on setTimeout
+// func takes - a function, array of args and time t as arguments.
+// I have to return a function name - cancelFn, adn this will be invoked after a time of cancelTimeMs
+function cancellable(fn, args, t) {
+    const callFn = setTimeout(() => {
+        fn(args)
+    }, t)
+
+    return function cancelFn(cancelTimeMs) {
+        setTimeout(() => {
+            clearTimeout(callFn)
+        }, cancelTimeMs)
+    }
+}
+
+
+// Array methods 
+let testArr = [1, 2, 3, "four", "five", 6]
+console.log("test rounding", Math.ceil(5.7));
+testArr.sort((a, b) => a < b)
+console.log(testArr[3].split(""));
+
+function squareSum(...numbers) {
+    let squaredArr = []
+    let total = 0
+    // let squaredArr = numbers.map((item) => item ** 2)
+    // return squaredArr.reduce((accumulator, initialVal) => accumulator+initialVal, 0)
+    for (let i = 0; i < numbers.length; i++) {
+        squaredArr.push(numbers[i] ** 2)
+        total += squaredArr[i]
+    }
+    return total
+}
+console.log(squareSum(1, 2,3,4,5))

@@ -60,7 +60,7 @@ function map(arr, fn) {
     return trans
 }
 
-function add(num) {
+function multiply(num) {
     return num * 2
 }
 
@@ -102,7 +102,7 @@ function reduce(arr, fn) {
 }
 
 function add(acc, sub) {
-    return acc - sub
+    return acc + sub
 }
 
 let resultReduce = reduce(b, add)
@@ -128,14 +128,18 @@ function memo() {
     const cache = {}
     return function fab(n) {
         if (n <= 1) return 1
-        if (n in cache) return cache[n]
+        if (n in cache) {
+            console.log("the cache storage", cache);
+            return cache[n]
+        }
         let result = fab(n - 1) + fab(n - 2)
         cache[n] = result
+        console.log("the cache after storing", cache);
         return result
     }
 }
 let dis = memo()
-console.log("fibonacci", dis(30));
+console.log("fibonacci", dis(5));
 
 // reverse a string 
 function rev(str) {
@@ -180,11 +184,8 @@ function mapWoking(arr, fn) {
     }
     return transMapArr
 }
-console.log(mapWoking(mapTestArr, addNew));
+console.log(mapWoking(mapTestArr, multiply));
 
-function addNew(n) {
-    return n * 2
-}
 
 // filter method 
 let filteredArr = mapTestArr.filter((val) => val > 2)
@@ -210,9 +211,66 @@ console.log(reducedArr);
 
 // reduce method creation 
 function beReduced(arr, fn, initialVal) {
-    let accumulator = initialVal 
+    let accumulator = initialVal
     for (let i = 0; i < arr.length; i++) {
         accumulator = fn(accumulator, arr[i])
     }
     return accumulator
 }
+console.log(beReduced(mapTestArr, add, 0));
+
+
+// settimeout question
+// let timeoutId = setTimeout(() => dumb(), 5000)
+
+// function dumb() {
+//     console.log("You are a dum dum")
+// }
+// const newTimer = setTimeout(() => clearTimeout(timeoutId), 6000)
+
+// // setInterval question 
+// let intervalId = setInterval(() => {
+//     console.log("red")
+// }, 1000);
+// function intervalstopper() {
+//     setTimeout(() => {
+//         clearInterval(intervalId)
+//     }, 10000);
+// }
+// intervalstopper()
+
+// score calculations kata
+function points(games) {
+    let team1Points = 0
+    for (let i = 0; i < games.length; i++) {
+        let [team1Score, team2Score] = games[i].split(":").map(Number)
+        if (team1Score > team2Score) {
+            team1Points += 3
+        } else if (team1Score === team2Score) {
+            team1Points += 1
+        }
+    }
+    return team1Points
+}
+let newArrr = ["1:2", "2:1", "5:3", "2:2", "3:3", "3:4"]
+console.log("Total points of Team A are:", points(newArrr));
+
+
+// Descending order of number
+function descendingOrder(n) {
+    let changedNum = n.toString().split('')
+    let sortedNum = changedNum.sort((a, b) => b - a)
+    let transString = parseInt(sortedNum.join(''))
+    console.log(typeof (transString));
+    // let changedNum =parseInt(n.toString().split('').sort((a, b) => b - a).join(''))
+    return transString
+}
+console.log("largest number is:", descendingOrder(1234));
+
+// simple search bar 
+let searchbarArr = ["Aaran", "Aaren", "Aarez", "Aarman", "Aaron", "Aaron-James", "Aarron", "Aaryan", "Aaryn", "Aayan", "Aazaan", "Abaan"]
+let search = document.getElementById("searchBar")
+let list = document.querySelector('.nameList')
+let btn = getElementById("search")
+
+list.textContent = searchbarArr
