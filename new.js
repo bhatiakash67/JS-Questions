@@ -154,29 +154,28 @@ aOb.func()
 
 
 // promise 
-function getUserData(isSuccess) {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            if (isSuccess) {
-                const user = {
-                    name: 'john', age: 25
-                }
-                resolve(user)
-            }
-            else {
-                reject("Failed to fetch user data")
-            }
-        }, 5000)
-    })
-}
-
-getUserData(false)
-    .then((userData) => {
-        console.log("Data received: ", userData);
-    })
-    .catch((error) => {
-        console.log("Error:", error);
-    })
+// function getUserData(isSuccess) {
+//     return new Promise((resolve, reject) => {
+//         setTimeout(() => {
+//             if (isSuccess) {
+//                 const user = {
+//                     name: 'john', age: 25
+//                 }
+//                 resolve(user)
+//             }
+//             else {
+//                 reject("Failed to fetch user data")
+//             }
+//         }, 5000)
+//     })
+// }
+// getUserData(false)
+//     .then((userData) => {
+//         console.log("Data received: ", userData);
+//     })
+//     .catch((error) => {
+//         console.log("Error:", error);
+//     })
 
 // leetcode question on setTimeout
 // func takes - a function, array of args and time t as arguments.
@@ -200,6 +199,7 @@ console.log("test rounding", Math.ceil(5.7));
 testArr.sort((a, b) => a < b)
 console.log(testArr[3].split(""));
 
+// sum of squared array elements
 function squareSum(...numbers) {
     let squaredArr = []
     let total = 0
@@ -211,4 +211,84 @@ function squareSum(...numbers) {
     }
     return total
 }
-console.log(squareSum(1, 2,3,4,5))
+console.log(squareSum(1, 2, 3, 4, 5))
+
+// 
+function arrOp(num) {
+    let str = num.toString(10)
+    let reversedStr = []
+    for (let i = str.length - 1; i >= 0; i--) {
+        reversedStr.push(Number(str[i]))
+    }
+    return reversedStr
+}
+console.log(arrOp(2345))
+
+function findSmall(arr) {
+    arr.sort((a, b) => a - b)
+    return arr
+}
+console.log(findSmall([3, 2, 1, 5, 6]))
+
+let names = [1, 2, 3, 4]
+console.log(names.slice(1, -1));
+
+function isPangram(string) {
+
+}
+isPangram('The quick brown fox jumps over the lazy dog')
+
+// binary  to decimal with builtin method
+let binary = '1101000'
+let digit = parseInt(binary, 2)
+console.log(digit);
+
+// binary to decimal through iteration
+const binaryArrayToNumber = arr => {
+    let decimalValue = 0
+    for (let i = 0; i < arr.length; i++) {
+        decimalValue += arr[i] * Math.pow(2, arr.length - 1 - i)
+    }
+    return decimalValue
+};
+console.log(binaryArrayToNumber([1, 1, 1, 1]));
+
+// binary to decimal with reduce
+const binaryArrayToNumberred = arr => {
+    return arr.reduce((accu, curr, index) => accu + curr * Math.pow(2, arr.length - 1 - index), 0)
+};
+console.log("reduce", binaryArrayToNumberred([0, 0, 0, 1]));
+
+// repeat strings n times
+function repeatStr(n, s) {
+    let repeatedStr = ''
+    for (let i = 1; i <= n; i++) {
+        repeatedStr += s
+    }
+    return repeatedStr;
+}
+console.log(repeatStr(3, 'Hola'));
+
+//   special casing of sentences
+function specialCasing(string) {
+    let strArr = string.split(' ')
+    let updatedStr = ''
+    for (let i = 0; i < strArr.length; i++) {
+        let cased = strArr[i][0].toUpperCase()+strArr[i].slice(1)
+        updatedStr+=cased+' '
+    }    
+    return updatedStr.trim()
+}
+let str = "How can mirrors be real if our eyes aren't real"
+console.log(specialCasing(str));
+
+console.log(this);
+
+function thisCheck() {
+    console.log(this);
+}
+thisCheck()
+const red=() => {
+    console.log(this);
+}
+red()
