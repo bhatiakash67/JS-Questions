@@ -133,15 +133,15 @@ function incriadder() {
 incriadder()
 
 // this keyword
-console.log(this);
-function thistest() {
-    // console.log("normal function", this);
-}
-thistest()
-const aaa = () => {
-    console.log("arrow function", this)
-}
-aaa()
+// console.log(this);
+// function thistest() {
+//     // console.log("normal function", this);
+// }
+// thistest()
+// const aaa = () => {
+//     console.log("arrow function", this)
+// }
+// aaa()
 
 let aOb = {
     name: "ronaldo",
@@ -274,21 +274,201 @@ function specialCasing(string) {
     let strArr = string.split(' ')
     let updatedStr = ''
     for (let i = 0; i < strArr.length; i++) {
-        let cased = strArr[i][0].toUpperCase()+strArr[i].slice(1)
-        updatedStr+=cased+' '
-    }    
+        let cased = strArr[i][0].toUpperCase() + strArr[i].slice(1)
+        updatedStr += cased + ' '
+    }
     return updatedStr.trim()
 }
 let str = "How can mirrors be real if our eyes aren't real"
 console.log(specialCasing(str));
 
-console.log(this);
+// console.log(this);
 
-function thisCheck() {
-    console.log(this);
+// function thisCheck() {
+//     console.log(this);
+// }
+// thisCheck()
+// const red = () => {
+//     console.log('this context', this);
+// }
+// red()
+
+
+function highAndLow(numbers) {
+    let numberStr = numbers.split(' ').map(Number).sort((a, b) => a - b)
+    return numberStr[numberStr.length - 1] + ' ' + numberStr[0]
+    // .map(Number)    
+    // let max = numberStr[0]
+    // let min = numberStr[0]
+    // for (let i = 0; i < numberStr.length; i++) {
+    //     if (numberStr[i] > max) {
+    //         numberStr[i]=max 
+    //     } if (numberStr[i] < min) {
+    //         min = numberStr[i]
+    //     }
+    // }
+    return `${max} ${min}`
 }
-thisCheck()
-const red=() => {
-    console.log(this);
+console.log(highAndLow('5 1 2 3 4'));
+
+function findShort(s) {
+    let a = s.split(' ')
+    let shortedWord = a[0]
+    // for (let i = 0; i < a.length; i++) {
+    //     if (shortedWord.length > a[i].length) {
+    //         shortedWord = a[i]
+    //     }
+    // }
+    for (const word of a) {
+        if (shortedWord.length > word.length) {
+            shortedWord = word
+        }
+    }
+    return shortedWord
 }
-red()
+console.log(findShort("bitcoin take over the world we maybe who knows perhaps"));
+
+
+function persistenceForOf(num) {
+    let count = 0
+    while (num >= 10) {
+        let product = 1
+        for (const char of num.toString()) {
+            product *= +char
+        }
+        num = product
+        count++
+    }
+    return count
+}
+console.log('with while and for...of', persistenceForOf(999))
+
+function persistence(num) {
+    let count = 0
+    while (num >= 10) {
+        let product = 1
+        let numStringed = num.toString()
+        for (let i = 0; i < numStringed.length; i++) {
+            product *= +numStringed[i]
+        }
+        num = product
+        count++
+    }
+    return count
+}
+console.log('with while and for', persistence(999))
+
+function shortedPersistence(num) {
+    let count = 0
+    while (num >= 10) {
+        num = num.toString().split('').reduce((a, b) => a * +b)
+        count++
+    }
+    return count
+}
+console.log('shorted persistence', shortedPersistence(999));
+
+function getSum(a, b) {
+    if (a === b) return a
+    let min = Math.min(a, b)
+    let max = Math.max(a, b)
+    let sum = 0
+    for (let i = min; i <= max; i++) {
+        sum += i
+    }
+    return sum
+}
+console.log(getSum(5, -1));
+
+
+let testNew = [1, 2, 3, 4, 5]
+let output = testNew.map((a) => Number(a.toString(2)))
+console.log(typeof (output[0]));
+
+let aa = 10
+let bb = ++aa
+console.log('pre', aa, bb);
+
+let ccd = 10
+let dddd = ccd++
+console.log('post', ccd, dddd);
+
+let f = 21
+console.log(f++, ++f);
+
+function deleteNth(arr, n) {
+    let counter = {}
+    let result = []
+    for (let element of arr) {
+        counter[element] = (counter[element] || 0) + 1
+        if (counter[element] <= n) {
+            result.push(element)
+        }
+    }
+    // for (let i = 0; i < arr.length; i++) {
+    //     let element = arr[i]
+    //     counter[element] = (counter[element]||0) +1
+    //     if(counter[element]<=n) {
+    //         result.push(element)
+    //     }
+    // }
+    return result
+}
+console.log('remove', deleteNth([1, 1, 1, 2, 3, 4, 4, 3], 2));
+
+
+function grade(...args) {
+    let sum = 0
+    for (let i = 0; i < arguments.length; i++) {
+        sum += args[i]
+    }
+    let average = sum / arguments.length
+    let grade
+    if (average >= 90 && average <= 100) {
+        grade = 'A'
+    } else if (average >= 8090 && average < 90) {
+        grade = 'B'
+    }
+    else if (average >= 70 && average < 80) {
+        grade = 'C'
+    }
+    else if (average >= 60 && average < 70) {
+        grade = 'D'
+    } else if (average >= 0 && average < 60) {
+        grade = 'F'
+    }
+    return grade
+}
+console.log(grade(95, 90, 93));
+
+
+let v = [1, 2, 3, 4, 5]
+let x = [1, 2, 3, 4, 5, 6]
+// reverse an array out of place
+function reverseArrInPlace(arr) {
+    let reversedArr = []
+    for (let i = arr.length - 1; i >= 0; i--) {
+        reversedArr.push(arr[i])
+    }
+    return reversedArr
+}
+console.log('Reversed array out of place:', reverseArrInPlace(x));
+
+// reverse an array in place
+function reverseInPlace(arr) {
+    if (arr.length % 2 == 0) {
+        for (let i = 0; i <= (arr.length - 1) / 2; i++) {
+            let ele = arr[i]
+            arr[i] = arr[arr.length - 1 - i]
+            arr[arr.length - 1 - i] = ele
+        }
+    } else {
+        for (let i = 0; i <= arr.length / 2; i++) {
+            let ele = arr[i]
+            arr[i] = arr[arr.length - 1 - i]
+            arr[arr.length - 1 - i] = ele
+        }
+    }
+    return arr
+}
+console.log('Reversed array in place:', reverseInPlace(x));
